@@ -1,71 +1,84 @@
-# DNS for foursailsapps.com (Porkbun -> GitHub Pages)
+# DNS for foursailsapps.com (Porkbun registrar → Cloudflare DNS → GitHub Pages)
 
-The site is served by GitHub Pages from the `foursailapps/foursails-site` repo. The repo already
-contains `CNAME` (`foursailsapps.com`) and the Pages custom domain is set via the API. Nothing
-below is done automatically; add these records in Porkbun > Domain Management > foursailsapps.com > DNS.
+- Registrar: Porkbun. Only the nameservers are set there; all records live at Cloudflare.
+- DNS + email: Cloudflare (Free plan). Email Routing forwards `support@`, `privacy@`, each
+  `<app>@`, and a catch-all to one inbox.
+- Site: GitHub Pages from the `foursailsapps/foursails-site` repo. The repo contains `CNAME`
+  (`foursailsapps.com`); the Pages custom domain was set via the API, never through the web UI
+  (web changes create CNAME commits under a personal account).
+- Spelling: the domain is `foursails**apps**.com` with the "s" after "sail", matching the studio
+  name Four Sails. The GitHub org is `foursailsapps` (renamed from `foursailapps` on 2026-10-15 to match).
 
-## 1. Delete Porkbun's defaults first
+## 1. Porkbun: nameservers only
 
-Porkbun pre-creates records that will conflict. Delete, for the apex and `www`:
+Domain Management > foursailsapps.com > Authoritative Nameservers > replace the four Porkbun
+nameservers with the two Cloudflare assigns to the zone. Leave everything else at Porkbun alone;
+its DNS records and email forwards are ignored once the nameservers move.
 
-- any `ALIAS` or `CNAME` record on the apex (`foursailsapps.com`) pointing at `pixie.porkbun.com`
-- any `A` record on the apex pointing at Porkbun parking IPs
-- any `CNAME` on `www` pointing at `pixie.porkbun.com`
-- any URL forwarding entry for the domain (Domain Management > URL Forwarding)
+## 2. Cloudflare: records
 
-Do NOT delete the `MX` records or the `TXT`/SPF record Porkbun created for email forwarding.
+Add the zone (Add a domain > Connect a domain > `foursailsapps.com` > Free). Import
+`foursailsapps.com.zone` (DNS > Records > Import and Export) with "Proxy imported DNS records"
+unchecked, or add by hand. Every record is **DNS only** (grey cloud): proxying breaks GitHub's
+certificate renewal and its HTTPS enforcement check.
 
-## 2. Add these records
+| Type  | Name     | Content                 |
+|-------|----------|-------------------------|
+| A     | `@`      | 185.199.108.153         |
+| A     | `@`      | 185.199.109.153         |
+| A     | `@`      | 185.199.110.153         |
+| A     | `@`      | 185.199.111.153         |
+| AAAA  | `@`      | 2606:50c0:8000::153     |
+| AAAA  | `@`      | 2606:50c0:8001::153     |
+| AAAA  | `@`      | 2606:50c0:8002::153     |
+| AAAA  | `@`      | 2606:50c0:8003::153     |
+| CNAME | `www`    | foursailsapps.github.io     |
+| TXT   | `_dmarc` | `v=DMARC1; p=none;`     |
 
-| Type  | Host  | Answer                     | TTL |
-|-------|-------|----------------------------|-----|
-| A     | (blank / apex) | 185.199.108.153   | 600 |
-| A     | (blank / apex) | 185.199.109.153   | 600 |
-| A     | (blank / apex) | 185.199.110.153   | 600 |
-| A     | (blank / apex) | 185.199.111.153   | 600 |
-| AAAA  | (blank / apex) | 2606:50c0:8000::153 | 600 |
-| AAAA  | (blank / apex) | 2606:50c0:8001::153 | 600 |
-| AAAA  | (blank / apex) | 2606:50c0:8002::153 | 600 |
-| AAAA  | (blank / apex) | 2606:50c0:8003::153 | 600 |
-| CNAME | www   | foursailapps.github.io       | 600 |  <- changed 2026-10-15: repos moved to the foursailapps org; update this record at Porkbun (was andrewchae.github.io)
+Do not add MX or SPF by hand; Email Routing writes them (step 3). DMARC stays at `p=none`
+while replies are sent through Gmail "Send mail as" (signed by gmail.com, not this domain).
 
-In Porkbun the "Host" field for the apex is left empty (Porkbun appends the domain).
+## 3. Cloudflare: Email Routing
 
-Do not add any MX records: Porkbun's email forwarding depends on the MX records it already manages.
+Email > Email Routing > Get started.
 
-## 3. Verify
+1. Destination address: the studio inbox; click the verification link it receives.
+2. Custom addresses, each → that destination: `support`, `privacy`, `fuel-log`, `pool-calc`,
+   `meditation-timer`, `desk-health` (add one per app at launch).
+3. Catch-all → same destination.
+4. "Add records and enable" writes the MX records (`route1/2/3.mx.cloudflare.net`) and the
+   SPF TXT (`v=spf1 include:_spf.mx.cloudflare.net ~all`).
 
-After a few minutes:
+Replies: Gmail > Settings > Accounts > "Send mail as" > `support@foursailsapps.com` via
+`smtp.gmail.com:587` with a Google App Password. Then append `include:_spf.google.com` to the
+SPF record. Receive-only until that is done; replying from the personal address exposes it.
+
+## 4. Verify
 
 ```
-dig +short foursailsapps.com A        # four 185.199.x.153 addresses
-dig +short foursailsapps.com AAAA     # four 2606:50c0:800x::153 addresses
-dig +short www.foursailsapps.com CNAME  # foursailapps.github.io.
-curl -sI http://foursailsapps.com | head -3   # 301/200 from GitHub Pages
+dig +short NS foursailsapps.com         # two *.ns.cloudflare.com
+dig +short foursailsapps.com A          # four 185.199.x.153
+dig +short foursailsapps.com AAAA       # four 2606:50c0:800x::153
+dig +short www.foursailsapps.com CNAME  # foursailsapps.github.io.
+dig +short MX foursailsapps.com         # route1/2/3.mx.cloudflare.net
+curl -sI https://foursailsapps.com | head -1   # 200 from GitHub Pages
 ```
 
-## 4. Enforce HTTPS (after DNS resolves)
+Send a test to `support@` from an account other than the destination inbox (a self-sent test
+is merged into Gmail's Sent thread and never shows in the Inbox).
 
-GitHub issues a Let's Encrypt certificate once it can see the DNS above (usually under an hour,
-up to 24 h). Then:
+## 5. GitHub Pages HTTPS
 
-1. Open https://github.com/foursailapps/foursails-site/settings/pages
-2. Confirm "Custom domain" shows `foursailsapps.com` with a green "DNS check successful".
-3. Tick **Enforce HTTPS**. (It is greyed out until the certificate is issued; retry later.)
-
-Or from the CLI once the cert exists:
+Already enforced (2026-10-15). If the certificate ever needs re-issuing, confirm the records
+above are DNS only, then:
 
 ```
-gh api -X PUT repos/foursailapps/foursails-site/pages -F https_enforced=true
+gh api -X PUT repos/foursailsapps/foursails-site/pages -F https_enforced=true
 ```
 
-## 5. Email forwarding (support@ and per-app aliases)
+## History
 
-Email forwarding is configured in Porkbun, not in DNS records you add by hand:
-Porkbun > Domain Management > foursailsapps.com > Email Forwarding.
-
-- Add `support` -> your inbox.
-- Add `fuel-log` and `pool-calc` -> your inbox (the site links to `<app>@foursailsapps.com`).
-- Add a catch-all (`*`) -> your inbox so future `<app>@` aliases work without extra setup.
-
-Porkbun writes the MX records it needs when forwarding is enabled; leave those records as they are.
+- 2026-10-15: registered at Porkbun; GitHub Pages records added at Porkbun; HTTPS enforced.
+- 2026-10-15: Porkbun email forwarding tried (20-alias cap, no catch-all); replaced by
+  Cloudflare Email Routing. Nameservers moved to Cloudflare. GitHub org renamed
+  `foursailapps` → `foursailsapps`; `www` CNAME retargeted.
