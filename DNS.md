@@ -1,8 +1,9 @@
 # DNS for foursailsapps.com (Porkbun registrar → Cloudflare DNS → GitHub Pages)
 
 - Registrar: Porkbun. Only the nameservers are set there; all records live at Cloudflare.
-- DNS + email: Cloudflare (Free plan). Email Routing forwards `support@`, `privacy@`, each
-  `<app>@`, and a catch-all to one inbox.
+- DNS + email: Cloudflare (Free plan). Email Routing catch-all forwards every address
+  (`support@`, `privacy@`, each `<app>@`) to one inbox. No explicit aliases; add them only to
+  route an address differently or to switch the catch-all to Drop if spam becomes a problem.
 - Site: GitHub Pages from the `foursailsapps/foursails-site` repo. The repo contains `CNAME`
   (`foursailsapps.com`); the Pages custom domain was set via the API, never through the web UI
   (web changes create CNAME commits under a personal account).
@@ -43,10 +44,9 @@ while replies are sent through Gmail "Send mail as" (signed by gmail.com, not th
 Email > Email Routing > Get started.
 
 1. Destination address: the studio inbox; click the verification link it receives.
-2. Custom addresses, each → that destination: `support`, `privacy`, `fuel-log`, `pool-calc`,
-   `meditation-timer`, `desk-health` (add one per app at launch).
-3. Catch-all → same destination.
-4. "Add records and enable" writes the MX records (`route1/2/3.mx.cloudflare.net`) and the
+2. Catch-all → Send to that destination. (Explicit custom addresses are optional and take
+   precedence over the catch-all; none are set as of 2026-10-15.)
+3. "Add records and enable" writes the MX records (`route1/2/3.mx.cloudflare.net`) and the
    SPF TXT (`v=spf1 include:_spf.mx.cloudflare.net ~all`).
 
 Replies: Gmail > Settings > Accounts > "Send mail as" > `support@foursailsapps.com` via
@@ -81,4 +81,6 @@ gh api -X PUT repos/foursailsapps/foursails-site/pages -F https_enforced=true
 - 2026-10-15: registered at Porkbun; GitHub Pages records added at Porkbun; HTTPS enforced.
 - 2026-10-15: Porkbun email forwarding tried (20-alias cap, no catch-all); replaced by
   Cloudflare Email Routing. Nameservers moved to Cloudflare. GitHub org renamed
-  `foursailapps` → `foursailsapps`; `www` CNAME retargeted.
+  `foursailapps` → `foursailsapps`; `www` CNAME retargeted. Verified live the same day:
+  NS phil/raquel.ns.cloudflare.com, MX route1-3.mx.cloudflare.net, SPF Cloudflare, DMARC
+  p=none, catch-all enabled, site 200 over HTTPS, www 301 → apex.
