@@ -8,7 +8,7 @@
 # dig alone cannot list a zone, so stale records only show up with the export.
 set -u
 D=foursailsapps.com
-R=1.1.1.1
+R=phil.ns.cloudflare.com   # authoritative, so answers are never stale cache
 fail=0
 
 expect() { # expect <label> <actual> <expected>
@@ -26,17 +26,19 @@ expect "TXT @ (SPF only)" "$(q TXT $D)"  "\"v=spf1 include:_spf.mx.cloudflare.ne
 expect "TXT _dmarc" "$(q TXT _dmarc.$D)" "\"v=DMARC1; p=none;\""
 
 # Names that should NOT resolve (leftovers from Porkbun defaults or old setups).
-for n in mail ftp pixie _github-pages-challenge-foursailapps _github-pages-challenge-foursailsapps; do
-  r="$(dig +short "$n.$D" @$R | tr '\n' ' ')"
+for n in mail ftp pixie _acme-challenge default._domainkey _github-pages-challenge-foursailapps _github-pages-challenge-foursailsapps; do
+  r="$( (dig +short "$n.$D" A @$R; dig +short "$n.$D" TXT @$R) | tr '\n' ' ')"
   if [ -n "$r" ]; then echo "EXTRA $n.$D -> $r"; fail=1; else echo "ok    no $n.$D"; fi
 done
 
 # Optional: diff a Cloudflare BIND export against the canonical set (ignores SOA/NS/comments/TTL).
 if [ $# -ge 1 ]; then
-  # Portable (BSD sed/awk): drop comments, SOA and NS rows; drop the TTL column if present;
-  # collapse whitespace; strip the trailing dot on targets.
+  # Portable (BSD sed/awk): drop comments, SOA and NS rows; strip Cloudflare's inline
+  # "; cf_tags=..." comments; join split TXT strings ("a" "b" -> "ab"); drop the TTL column if
+  # present; collapse whitespace; strip the trailing dot on targets.
   norm() {
     grep -vE '^[[:space:]]*(;|$)' "$1" | grep -vE '[[:space:]](SOA|NS)[[:space:]]' \
+      | sed -E 's/[[:space:]]*; cf_tags=.*$//; s/" "//g' \
       | awk '{ if ($2 ~ /^[0-9]+$/) $2 = ""; gsub(/[ \t]+/, " "); sub(/^ /, ""); sub(/ $/, ""); print }' \
       | sed -E 's/\.$//' | sort
   }
@@ -56,9 +58,12 @@ $D. IN MX 70 route2.mx.cloudflare.net.
 $D. IN MX 92 route1.mx.cloudflare.net.
 $D. IN TXT "v=spf1 include:_spf.mx.cloudflare.net ~all"
 _dmarc.$D. IN TXT "v=DMARC1; p=none;"
+cf2024-1._domainkey.$D. IN TXT "v=DKIM1; h=sha256; k=rsa; p=<cloudflare-email-routing-key>"
 EOF
+  # Replace Email Routing's DKIM public key with a placeholder so key rotation is not a diff.
+  mask() { sed -E 's/^(cf2024-1\._domainkey\.[^ ]+ IN TXT "v=DKIM1; h=sha256; k=rsa; p=)[^"]+"/\1<cloudflare-email-routing-key>"/'; }
   echo "--- export diff (< canonical, > export) ---"
-  if diff <(norm "$canon") <(norm "$1"); then echo "ok    export matches the canonical set"; else fail=1; fi
+  if diff <(norm "$canon" | mask) <(norm "$1" | mask); then echo "ok    export matches the canonical set"; else fail=1; fi
   rm -f "$canon"
 fi
 

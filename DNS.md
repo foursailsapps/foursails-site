@@ -12,8 +12,8 @@
 
 ## Canonical record set (the whole zone; anything else is stale, delete it)
 
-14 records. Email Routing owns the MX and SPF rows; everything else is ours. If a record is not
-in this table and not explained by a dated note below it, it should not exist.
+15 records. Email Routing owns the MX, SPF and DKIM rows; everything else is ours. If a record
+is not in this table and not explained by a dated note below it, it should not exist.
 
 | # | Type  | Name     | Content                                      | Owner | Purpose |
 |---|-------|----------|----------------------------------------------|-------|---------|
@@ -23,13 +23,18 @@ in this table and not explained by a dated note below it, it should not exist.
 | 10-12 | MX | `@`     | route1 / route2 / route3.mx.cloudflare.net   | Email Routing | inbound mail |
 | 13 | TXT  | `@`      | `v=spf1 include:_spf.mx.cloudflare.net ~all` | Email Routing | SPF (append `include:_spf.google.com` when Gmail send-as is set up) |
 | 14 | TXT  | `_dmarc` | `v=DMARC1; p=none;`                          | us    | DMARC, monitor only |
+| 15 | TXT  | `cf2024-1._domainkey` | `v=DKIM1; h=sha256; k=rsa; p=...` (2048-bit) | Email Routing | Cloudflare's DKIM key for mail it forwards/sends; key may rotate |
 
-All DNS only (grey cloud). No DKIM record exists because nothing signs mail for this domain yet.
+All DNS only (grey cloud). No other DKIM selector should exist: nothing else signs mail for this
+domain until a sending provider is set up.
 
 Known stale records that have been removed and must not come back: Porkbun's `pixie.porkbun.com`
 ALIAS/CNAME and parking A records; Porkbun MX (`fwd1/fwd2.porkbun.com`) and SPF
 (`_spf.porkbun.com`); the MXToolbox DMARC (`p=quarantine; rua=...dmarc-report.com`); any
-`www` CNAME to `andrewchae.github.io` or `foursailapps.github.io` (old org spellings).
+`www` CNAME to `andrewchae.github.io` or `foursailapps.github.io` (old org spellings);
+two `_acme-challenge` TXT records and a 1024-bit `default._domainkey` DKIM TXT, all carried in by
+Cloudflare's initial scan of the Porkbun zone (Porkbun's auto-SSL and forwarding leftovers;
+GitHub Pages validates its certificate over HTTP, not DNS, so it never needs `_acme-challenge`).
 
 Audit: `./dns-audit.sh` checks the live records with dig. To catch *extra* records, export the
 zone (Cloudflare > DNS > Records > Import and Export > Export) and run
