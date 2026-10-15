@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420">
+  <g transform="translate(40 -10) scale(0.84)">
+  <!-- sails, drawn first so masts sit on top -->
+  <polygon points="82,322 174,236 174,334" fill="#5C1F24" opacity="0.78"/>
+  <polygon points="186,222 186,334 266,334 266,170" fill="#5C1F24" opacity="0.62"/>
+  <polygon points="214,146 214,334 316,334 316,186" fill="#5C1F24" opacity="0.92"/>
+  <polygon points="344,104 344,334 470,334 470,176" fill="#5C1F24" opacity="0.92"/>
+  <!-- bowsprit, forestay, masts, gaffs -->
+  <g stroke="#1F1B1C" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="60"  y1="338" x2="236" y2="352" stroke-width="12"/>
+    <line x1="68"  y1="336" x2="200" y2="126" stroke-width="5"/>
+    <line x1="200" y1="110" x2="200" y2="352" stroke-width="14"/>
+    <line x1="330" y1="72"  x2="330" y2="352" stroke-width="14"/>
+    <line x1="206" y1="142" x2="318" y2="182" stroke-width="9"/>
+    <line x1="336" y1="100" x2="472" y2="172" stroke-width="9"/>
+  </g>
+  <!-- hull: raked stem, long sheer, counter stern -->
+  <path d="M46 350 Q60 346 90 348 L478 348 L448 402 Q256 420 86 404 Q60 396 46 350 Z" fill="#1F1B1C"/>
+  <!-- water -->
+  <path d="M28 438 q28 -18 56 0 t56 0 t56 0 t56 0 t56 0 t56 0 t56 0 t56 0"
+        fill="none" stroke="#9C5A66" stroke-width="12" stroke-linecap="round"/>
+  <path d="M60 470 q28 -18 56 0 t56 0 t56 0 t56 0 t56 0 t56 0 t56 0"
+        fill="none" stroke="#9C5A66" stroke-width="10" stroke-linecap="round" opacity="0.6"/></g>
+  <text x="520" y="235" font-family="Georgia, 'Iowan Old Style', serif" font-size="176" font-weight="600" fill="#5C1F24" letter-spacing="2">Four Sails</text>
+  <text x="526" y="318" font-family="Helvetica Neue, Arial, sans-serif" font-size="46" fill="#9C5A66" letter-spacing="10">SMALL APPS, WELL MADE</text>
+</svg>
