@@ -10,6 +10,31 @@
 - Spelling: the domain is `foursails**apps**.com` with the "s" after "sail", matching the studio
   name Four Sails. The GitHub org is `foursailsapps` (renamed from `foursailapps` on 2026-10-15 to match).
 
+## Canonical record set (the whole zone; anything else is stale, delete it)
+
+14 records. Email Routing owns the MX and SPF rows; everything else is ours. If a record is not
+in this table and not explained by a dated note below it, it should not exist.
+
+| # | Type  | Name     | Content                                      | Owner | Purpose |
+|---|-------|----------|----------------------------------------------|-------|---------|
+| 1-4 | A   | `@`      | 185.199.108.153 / .109 / .110 / .111         | us    | GitHub Pages apex |
+| 5-8 | AAAA| `@`      | 2606:50c0:8000::153 / 8001 / 8002 / 8003     | us    | GitHub Pages apex (IPv6) |
+| 9 | CNAME | `www`    | foursailsapps.github.io                      | us    | www → Pages (GitHub 301s to apex) |
+| 10-12 | MX | `@`     | route1 / route2 / route3.mx.cloudflare.net   | Email Routing | inbound mail |
+| 13 | TXT  | `@`      | `v=spf1 include:_spf.mx.cloudflare.net ~all` | Email Routing | SPF (append `include:_spf.google.com` when Gmail send-as is set up) |
+| 14 | TXT  | `_dmarc` | `v=DMARC1; p=none;`                          | us    | DMARC, monitor only |
+
+All DNS only (grey cloud). No DKIM record exists because nothing signs mail for this domain yet.
+
+Known stale records that have been removed and must not come back: Porkbun's `pixie.porkbun.com`
+ALIAS/CNAME and parking A records; Porkbun MX (`fwd1/fwd2.porkbun.com`) and SPF
+(`_spf.porkbun.com`); the MXToolbox DMARC (`p=quarantine; rua=...dmarc-report.com`); any
+`www` CNAME to `andrewchae.github.io` or `foursailapps.github.io` (old org spellings).
+
+Audit: `./dns-audit.sh` checks the live records with dig. To catch *extra* records, export the
+zone (Cloudflare > DNS > Records > Import and Export > Export) and run
+`./dns-audit.sh export.txt`; it diffs the export against this table.
+
 ## 1. Porkbun: nameservers only
 
 Domain Management > foursailsapps.com > Authoritative Nameservers > replace the four Porkbun
