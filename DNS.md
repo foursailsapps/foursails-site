@@ -1,6 +1,6 @@
 # DNS for foursailsapps.com (Porkbun -> GitHub Pages)
 
-The site is served by GitHub Pages from the `andrewchae/foursails-site` repo. The repo already
+The site is served by GitHub Pages from the `foursailapps/foursails-site` repo. The repo already
 contains `CNAME` (`foursailsapps.com`) and the Pages custom domain is set via the API. Nothing
 below is done automatically; add these records in Porkbun > Domain Management > foursailsapps.com > DNS.
 
@@ -27,7 +27,7 @@ Do NOT delete the `MX` records or the `TXT`/SPF record Porkbun created for email
 | AAAA  | (blank / apex) | 2606:50c0:8001::153 | 600 |
 | AAAA  | (blank / apex) | 2606:50c0:8002::153 | 600 |
 | AAAA  | (blank / apex) | 2606:50c0:8003::153 | 600 |
-| CNAME | www   | andrewchae.github.io       | 600 |
+| CNAME | www   | foursailapps.github.io       | 600 |  <- changed 2026-10-15: repos moved to the foursailapps org; update this record at Porkbun (was andrewchae.github.io)
 
 In Porkbun the "Host" field for the apex is left empty (Porkbun appends the domain).
 
@@ -40,7 +40,7 @@ After a few minutes:
 ```
 dig +short foursailsapps.com A        # four 185.199.x.153 addresses
 dig +short foursailsapps.com AAAA     # four 2606:50c0:800x::153 addresses
-dig +short www.foursailsapps.com CNAME  # andrewchae.github.io.
+dig +short www.foursailsapps.com CNAME  # foursailapps.github.io.
 curl -sI http://foursailsapps.com | head -3   # 301/200 from GitHub Pages
 ```
 
@@ -49,14 +49,14 @@ curl -sI http://foursailsapps.com | head -3   # 301/200 from GitHub Pages
 GitHub issues a Let's Encrypt certificate once it can see the DNS above (usually under an hour,
 up to 24 h). Then:
 
-1. Open https://github.com/andrewchae/foursails-site/settings/pages
+1. Open https://github.com/foursailapps/foursails-site/settings/pages
 2. Confirm "Custom domain" shows `foursailsapps.com` with a green "DNS check successful".
 3. Tick **Enforce HTTPS**. (It is greyed out until the certificate is issued; retry later.)
 
 Or from the CLI once the cert exists:
 
 ```
-gh api -X PUT repos/andrewchae/foursails-site/pages -F https_enforced=true
+gh api -X PUT repos/foursailapps/foursails-site/pages -F https_enforced=true
 ```
 
 ## 5. Email forwarding (support@ and per-app aliases)
