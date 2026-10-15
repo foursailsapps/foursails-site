@@ -26,10 +26,17 @@ expect "TXT @ (SPF only)" "$(q TXT $D)"  "\"v=spf1 include:_spf.mx.cloudflare.ne
 expect "TXT _dmarc" "$(q TXT _dmarc.$D)" "\"v=DMARC1; p=none;\""
 
 # Names that should NOT resolve (leftovers from Porkbun defaults or old setups).
-for n in mail ftp pixie _acme-challenge default._domainkey _github-pages-challenge-foursailapps _github-pages-challenge-foursailsapps; do
+for n in mail ftp pixie default._domainkey _github-pages-challenge-foursailapps _github-pages-challenge-foursailsapps; do
   r="$( (dig +short "$n.$D" A @$R; dig +short "$n.$D" TXT @$R) | tr '\n' ' ')"
   if [ -n "$r" ]; then echo "EXTRA $n.$D -> $r"; fail=1; else echo "ok    no $n.$D"; fi
 done
+
+# _acme-challenge: Cloudflare serves hidden TXT values here for its Universal SSL certificate.
+# They are not in the records list or the export and cannot be deleted (only disabling Universal
+# SSL removes them). Live values are therefore informational; stale user-added ones are caught by
+# the export diff below, which never contains Cloudflare's.
+acme="$(dig +short "_acme-challenge.$D" TXT @$R | tr '\n' ' ')"
+[ -n "$acme" ] && echo "info  _acme-challenge.$D (Cloudflare Universal SSL, expected) -> $acme" || echo "ok    no _acme-challenge.$D"
 
 # Optional: diff a Cloudflare BIND export against the canonical set (ignores SOA/NS/comments/TTL).
 if [ $# -ge 1 ]; then

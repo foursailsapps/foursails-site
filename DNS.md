@@ -28,6 +28,12 @@ is not in this table and not explained by a dated note below it, it should not e
 All DNS only (grey cloud). No other DKIM selector should exist: nothing else signs mail for this
 domain until a sending provider is set up.
 
+Not in the list but served anyway: Cloudflare answers `_acme-challenge` TXT queries with tokens
+for its own Universal SSL certificate. They are invisible in the records tab and the export and
+cannot be deleted there (see Cloudflare's "Unexpected _acme-challenge TXT records"). Harmless;
+the audit reports them as `info`. Disabling Universal SSL (SSL/TLS > Edge Certificates) would
+remove them, which is safe while nothing is proxied, but is not necessary.
+
 Known stale records that have been removed and must not come back: Porkbun's `pixie.porkbun.com`
 ALIAS/CNAME and parking A records; Porkbun MX (`fwd1/fwd2.porkbun.com`) and SPF
 (`_spf.porkbun.com`); the MXToolbox DMARC (`p=quarantine; rua=...dmarc-report.com`); any
