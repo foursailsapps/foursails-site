@@ -139,3 +139,13 @@ main > .wrap > :first-child { margin-top: 0; }
 @media (prefers-reduced-motion: no-preference) { a, .btn { transition: color 0.15s, background-color 0.15s; } }
 
 .contact-box .tight { margin-top: 0; }
+
+/* Highlighted note, e.g. a medical disclaimer on a support page. */
+.callout {
+  border-left: 4px solid var(--tanbark);
+  background: var(--card);
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+  border-radius: 6px;
+}
+.callout p { margin: 0; }
