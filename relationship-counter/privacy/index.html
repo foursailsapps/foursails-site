@@ -48,12 +48,13 @@
         <li>The two names and the date you got together.</li>
         <li>Dates you add: title, date, whether it repeats yearly, and whether to remind you.</li>
         <li>Settings such as your reminder time (these stay on each phone and are never shared).</li>
+        <li>If you add one, a background photo: a copy of the picture you choose, saved in the app's storage on this phone. It is shown on Home and on your widget, and is never shared with your partner, uploaded, or included in exports.</li>
       </ul>
       <p>None of this leaves your device unless you export it yourself or turn on sharing (below).</p>
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
       <h2>Sharing with your partner (optional)</h2>
       <p>Heartcount works entirely on your phone until you choose to share. Nothing is sent anywhere, and the app does not contact our server, until you open Share with partner and create or enter a six-digit code.</p>
-      <p>When you do, the app signs in to our sync server anonymously: it gets a random account ID with no name, email or phone number attached. From then on the server keeps a copy of what you share so both phones stay in step: the two names, the date you got together, and the dates you add (title, date and the yearly and reminder switches). Per-phone settings such as reminder times are never shared.</p>
+      <p>When you do, the app signs in to our sync server anonymously: it gets a random account ID with no name, email or phone number attached. From then on the server keeps a copy of what you share so both phones stay in step: the two names, the date you got together, the dates you add (title, date and the yearly and reminder switches), and whether to count the first day as day 1. Per-phone settings such as reminder times are never shared.</p>
       <p>The sync server is a database run for us by <a href="https://supabase.com/">Supabase</a> in the United States. Database access rules ensure that only the two paired phones can read or change your shared items. We do not look at them, except to troubleshoot when you ask us to. Like any internet service, Supabase sees the IP address your phone connects from and keeps standard request logs for a limited time; see the <a href="https://supabase.com/privacy">Supabase privacy policy</a>. A pairing code expires after 10 minutes.</p>
       <p>Tap Stop sharing on either phone to leave the pair; that phone keeps its own copy. When both phones have left, the pair and every shared item are deleted from the server. To have the anonymous account ID removed as well, email us.</p>
       <h2>Exports you choose to share</h2>
@@ -62,7 +63,7 @@
       <h2>Notifications</h2>
       <p>Reminders for anniversaries, milestones and your own dates are local notifications scheduled on your phone; no push server is involved. The app asks for permission when you first turn reminders on, and you can turn notifications off at any time in your phone's settings.</p>
       <h2>Home-screen widget</h2>
-      <p>The home-screen widget shows your day count and the next dates. To draw it, the app saves a short summary (names, start date and the next two dates) in storage shared only with its own widget on your phone. It never leaves the device.</p>
+      <p>The home-screen widget shows your day count and the next dates. To draw it, the app saves a short summary (names, start date, the next two dates and, if you added one, your photo) in storage shared only with its own widget on your phone. It never leaves the device.</p>
       <h2>App updates</h2>
       <p>To receive bug fixes without a full App Store update, Heartcount checks Expo's update service (EAS Update, run by Expo, 650 Industries) when it starts. That request contains the app's version, your platform and an update channel name, and Expo's servers see your IP address as with any download. It carries none of the data you enter in the app and no identifier that links to you. Expo's handling is described in the <a href="https://expo.dev/privacy">Expo privacy policy</a>.</p>
       <h2>In-app purchases</h2>
