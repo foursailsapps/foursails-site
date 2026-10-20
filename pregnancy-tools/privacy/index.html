@@ -46,19 +46,21 @@
       <p>Bumpday saves the information you enter in a local database (SQLite) inside the app's private storage on your phone. That includes:</p>
       <ul>
         <li>Kick sessions: when each started and ended, and the time of each kick you tapped.</li>
-        <li>Contractions: when each started and ended.</li>
+        <li>Contractions: when each started and ended, the intensity you rate and any note.</li>
+        <li>Labor notes you add, such as the time your water broke.</li>
         <li>Feeds: breast side or bottle, start and end times, bottle amounts and notes.</li>
-        <li>Settings such as ml or oz and kicks per session.</li>
+        <li>Diaper changes: time, wet or dirty, and an optional note.</li>
+        <li>Settings such as ml or oz, kicks per session and the reminder time.</li>
       </ul>
       <p>None of this leaves your device unless you export it yourself. We have no server that receives it, and we cannot see it.</p>
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
       <h2>Health information</h2>
-      <p>What you record in Bumpday is health information. It is stored only on your phone. It is not written to Apple Health or Google Health Connect, not sent to us, and not shared with any third party (RevenueCat, described below, receives purchase information only, never your records). A CSV leaves your phone only when you share it yourself.</p>
+      <p>What you record in Bumpday is health information. It is stored only on your phone. It is not written to Apple Health or Google Health Connect, not sent to us, and not shared with any third party (RevenueCat, described below, receives purchase information only, never your records). A summary or CSV leaves your phone only when you share it yourself.</p>
       <h2>Exports you choose to share</h2>
-      <p>With Pro you can export kick sessions, contractions and feeds as CSV files from Settings. An export happens only when you tap the button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
+      <p>You can share a plain-text summary for your care provider from the kick counter, the contraction timer or Settings, and export a JSON backup. With Pro you can export kick sessions, contractions, feeds and diapers as CSV files. An export happens only when you tap the button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
       <p>Settings › Restore from backup reads a backup file that you pick yourself with your phone's file picker and replaces the app's data on this device with it. The file is read only on your phone.</p>
       <h2>Notifications</h2>
-      <p>Bumpday does not send notifications and never asks for notification permission.</p>
+      <p>If you turn on the daily kick-count reminder, the app asks for notification permission and schedules one local notification a day at the time you choose ("Time for your kick count"); no push server is involved. It is off by default, and you can turn it off in Settings or in your phone's settings.</p>
       <h2>App updates</h2>
       <p>To receive bug fixes without a full App Store update, Bumpday checks Expo's update service (EAS Update, run by Expo, 650 Industries) when it starts. That request contains the app's version, your platform and an update channel name, and Expo's servers see your IP address as with any download. It carries none of the data you enter in the app and no identifier that links to you. Expo's handling is described in the <a href="https://expo.dev/privacy">Expo privacy policy</a>.</p>
       <h2>In-app purchases</h2>
