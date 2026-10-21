@@ -39,16 +39,17 @@
   <main id="main">
     <div class="wrap prose">
       <h1>I Do privacy policy</h1>
-      <p class="meta">Effective 20 October 2026. Applies to the I Do app for iOS and Android, published by Four Sails.</p>
+      <p class="meta">Effective 21 October 2026. Applies to the I Do app for iOS and Android, published by Four Sails.</p>
 
       <p>The short version: I Do keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. If you choose to share with your partner, the items you share are also kept on our sync server, end-to-end encrypted so that only your two phones can read them; nothing is sent until you pair. The only other third party is the company that handles in-app purchases.</p>
       <h2>What the app stores, and where</h2>
       <p>I Do saves the information you enter in local storage inside the app's private storage on your phone. That includes:</p>
       <ul>
-        <li>The two names, the wedding date, the venue and your total budget.</li>
+        <li>The two names, the wedding date, the ceremony time, the venue and your total budget.</li>
         <li>Checklist tasks: title, due date, category, done or not, and notes.</li>
-        <li>Vendors: name, category, the contact details you type, cost, deposit and amount paid, booked status and notes.</li>
-        <li>Guests: name, party size, RSVP status, group and notes.</li>
+        <li>Vendors: name, category, the contact details you type, cost, deposit and amount paid, booked status and notes, and each vendor's payments (label, amount, due date and whether it is paid).</li>
+        <li>Guests: name, party size, RSVP status, group and notes, and if you add them, a meal choice, dietary notes (which can include allergies), table, postal address, gifts received and whether you have sent a thank-you.</li>
+        <li>The day-of schedule: time, title, place and note for each item.</li>
         <li>If you add one, a countdown photo: a copy of the picture you choose, saved in the app's storage on this phone. It is shown on Home and on your widget, and is never shared with your partner, uploaded, or included in exports.</li>
         <li>Settings such as your reminder time and currency (these stay on each phone and are never shared).</li>
       </ul>
@@ -56,16 +57,16 @@
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
       <h2>Sharing with your partner (optional)</h2>
       <p>I Do works entirely on your phone until you choose to share. Nothing is sent anywhere, and the app does not contact our server, until you open Share with partner and show an invite, or open one from your partner.</p>
-      <p>When you do, the app signs in to our sync server anonymously: it gets a random account ID with no name, email or phone number attached. From then on the server keeps an encrypted copy of what you share so both phones stay in step: the two names, the wedding date, venue and budget, your checklist tasks, your vendors (including the contact details, costs, payments and notes you type) and your guest list (names, party sizes, RSVPs, groups and notes). Your countdown photo is never shared. Per-phone settings such as reminder times are never shared.</p>
+      <p>When you do, the app signs in to our sync server anonymously: it gets a random account ID with no name, email or phone number attached. From then on the server keeps an encrypted copy of what you share so both phones stay in step: the two names, the wedding date, ceremony time, venue and budget, your checklist tasks, your vendors (including the contact details, costs, payments and notes you type) and their payment schedules, your guest list (names, party sizes, RSVPs, groups and notes, plus meal choices, dietary notes, tables, postal addresses, gifts and thank-you status) and the day-of schedule. Your countdown photo is never shared. Per-phone settings such as reminder times are never shared.</p>
       <p>The sync server is a database run for us by <a href="https://supabase.com/">Supabase</a> in the United States. Everything you share is encrypted on your phone before it is sent (end-to-end, AES-256-GCM), with a key that only your two phones have: it is created when one of you shows an invite and reaches the other phone inside the invite's QR code or link, never through our server. Neither we nor Supabase can read your shared items. The server does see what it needs to keep the phones in step: the anonymous account IDs, which two are paired, the name of each shared item (such as "profile"), its size and when it last changed. Database access rules also ensure that only the two paired phones can read or change the encrypted items. If you send the invite as a link, it passes through the app you send it with (for example Messages), so send it only to your partner. Like any internet service, Supabase sees the IP address your phone connects from and keeps standard request logs for a limited time; see the <a href="https://supabase.com/privacy">Supabase privacy policy</a>. An invite expires after 10 minutes.</p>
       <p>Tap Stop sharing on either phone to leave the pair; that phone keeps its own copy. The other phone leaves the pair too the next time it opens I Do (or comes back to it) and also keeps its own copy; the pair and every shared item are then deleted from the server. Settings › Delete everything on this phone stops sharing first, so your partner keeps their copy. To have the anonymous account ID removed as well, email us.</p>
       <h2>Exports you choose to share</h2>
-      <p>With Pro you can export everything as a JSON file from Settings. An export happens only when you tap the button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
+      <p>With Pro you can export everything listed above (except the countdown photo and settings) as a JSON file from Settings, and the guest list as a CSV file that includes meal choices, dietary notes, tables, postal addresses, gifts and thank-you status. An export happens only when you tap the button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
       <p>Settings › Restore from backup reads a backup file that you pick yourself with your phone's file picker and replaces the app's data on this device with it. The file is read only on your phone.</p>
       <h2>Notifications</h2>
-      <p>Reminders for tasks and countdown milestones are local notifications scheduled on your phone; no push server is involved. The app offers to turn notifications on during setup (you can say not now) and asks again only when you turn a reminder on, and you can turn notifications off at any time in your phone's settings.</p>
+      <p>Reminders for tasks, vendor payments and countdown milestones are local notifications scheduled on your phone; no push server is involved. The app offers to turn notifications on during setup (you can say not now) and asks again only when you turn a reminder on, and you can turn notifications off at any time in your phone's settings.</p>
       <h2>Home-screen widget</h2>
-      <p>The home-screen widget shows the countdown and your next tasks. To draw it, the app saves a short summary (names, date, venue and the next two tasks) in storage shared only with its own widget on your phone. It never leaves the device.</p>
+      <p>The home-screen widget shows the countdown and, with Pro, your next tasks or, on the wedding day, what is on now and next in your day-of schedule. To draw it, the app saves a short summary (names, date, ceremony time, venue, the next two tasks or schedule items and, with Pro, your countdown photo) in storage shared only with its own widget on your phone. It never leaves the device.</p>
       <h2>App updates</h2>
       <p>To receive bug fixes without a full App Store update, I Do checks Expo's update service (EAS Update, run by Expo, 650 Industries) when it starts. That request contains the app's version, your platform and an update channel name, and Expo's servers see your IP address as with any download. It carries none of the data you enter in the app and no identifier that links to you. Expo's handling is described in the <a href="https://expo.dev/privacy">Expo privacy policy</a>.</p>
       <h2>In-app purchases</h2>
