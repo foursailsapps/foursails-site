@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gauge privacy policy - Four Sails</title>
-  <meta name="description" content="How the Gauge app handles your data: everything stays on your device, no analytics, no ads, no accounts.">
+  <meta name="description" content="How the Gauge app handles your data: everything stays on your device, optional vehicle lookups go to US government databases, no analytics, no ads, no accounts.">
   <link rel="canonical" href="https://foursailsapps.com/fuel-log/privacy/">
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/assets/favicon.png" type="image/png">
@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="Four Sails">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gauge privacy policy - Four Sails">
-  <meta property="og:description" content="How the Gauge app handles your data: everything stays on your device, no analytics, no ads, no accounts.">
+  <meta property="og:description" content="How the Gauge app handles your data: everything stays on your device, optional vehicle lookups go to US government databases, no analytics, no ads, no accounts.">
   <meta property="og:url" content="https://foursailsapps.com/fuel-log/privacy/">
   <meta property="og:image" content="https://foursailsapps.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -39,25 +39,41 @@
   <main id="main">
     <div class="wrap prose">
       <h1>Gauge privacy policy</h1>
-      <p class="meta">Effective 20 October 2026. Applies to the Gauge app for iOS and Android, published by Four Sails.</p>
+      <p class="meta">Effective 21 October 2026. Applies to the Gauge app for iOS and Android, published by Four Sails.</p>
 
-      <p>The short version: Gauge keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. The only third party involved is the company that handles in-app purchases.</p>
+      <p>The short version: Gauge keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. The only third parties involved are the company that handles in-app purchases and, when you use the optional vehicle lookups, free US government vehicle databases.</p>
 
       <h2>What the app stores, and where</h2>
       <p>Gauge saves the information you enter in a local database (SQLite) inside the app's private storage on your phone. That includes:</p>
       <ul>
-        <li>Vehicles you add: name and whether it runs on fuel or electricity.</li>
-        <li>Fill-ups: date, odometer reading, volume, price, whether the tank was filled, and notes.</li>
+        <li>Vehicles you add: name, whether it runs on fuel or electricity, and, if you enter them, its VIN, year, make and model, the EPA rating you picked and the recalls last found for it.</li>
+        <li>Fill-ups: date, odometer reading, volume, price, whether the tank was filled, the station you typed, and notes.</li>
+        <li>Photos you attach to fill-ups and costs, such as receipts and invoices, stored as image files in the app's private storage.</li>
         <li>Service reminders, the service log and other costs you add, such as insurance, repairs, parking and tolls (what, when, how much and at what mileage).</li>
         <li>Settings such as your preferred units.</li>
       </ul>
       <p>None of this leaves your device unless you export it yourself. We have no server that receives it, and we cannot see it.</p>
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
 
+      <h2>Photos and receipt scanning</h2>
+      <p>You can attach photos to a fill-up or a cost, taken with the camera or picked from your photo library. The app asks for camera access the first time you take one; the photo library opens through the system picker, so Gauge only sees the photos you choose. "Scan receipt" reads the amounts on a receipt photo with the text recognition built into your phone (Apple Vision on iPhone, Google ML Kit's on-device model on Android). The photo and the text are processed only on your phone and are never uploaded. Photos stay in the app's storage until you remove them or delete the fill-up or cost, and they are included in the JSON backup you export.</p>
+
+      <h2>Vehicle lookups</h2>
+      <p>Three optional features look things up on free public services run by the US government. None of them needs an account, and none receives anything you log in the app (fill-ups, costs, photos, notes).</p>
+      <ul>
+        <li><strong>VIN lookup.</strong> When you enter a VIN and tap "Look up VIN", Gauge sends the VIN to the National Highway Traffic Safety Administration's vehicle decoder (vpic.nhtsa.dot.gov) to fill in the year, make and model. When you open "EPA rating" for a vehicle with a VIN, the VIN is sent to the same decoder again to suggest the matching version.</li>
+        <li><strong>Recalls.</strong> For a vehicle with a year, make and model, Gauge asks NHTSA's recall service (api.nhtsa.gov) for the recalls listed for that year, make and model, when you open the vehicle and at most once a week, or when you tap "Check again". Only the year, make and model are sent, never the VIN.</li>
+        <li><strong>EPA rating.</strong> When you open "EPA rating", Gauge asks fueleconomy.gov (US Department of Energy and EPA) for the versions of that year, make and model and for the rating of the version you pick. Only the year, make, model and the chosen version are sent.</li>
+      </ul>
+      <p>As with any web request, these services see your IP address. Their handling is described in the <a href="https://www.transportation.gov/privacy">US Department of Transportation privacy policy</a> (NHTSA) and the <a href="https://www.energy.gov/about-us/web-policies/privacy">US Department of Energy privacy policy</a> (fueleconomy.gov). If you never enter a VIN, year, make or model, Gauge makes none of these requests.</p>
+
+      <h2>Widget and shortcuts</h2>
+      <p>The home-screen widget shows the next service, your latest efficiency and this month's spend. The app writes that summary to storage shared only with its own widget on your phone (an App Group on iPhone, the app's private files on Android); it is not sent anywhere. "Log fuel" and "Scan receipt" from Siri, the Shortcuts app or the Action Button only open the app: if you use Siri, Apple processes your voice request under Apple's privacy policy, and Gauge receives just the action, not the recording.</p>
+
       <h2>Importing a file</h2>
       <p>Settings › Import fill-ups reads a CSV file that you pick yourself with your phone's file picker (for example an export from Gauge or Fuelly) and adds its fill-ups to the app. The file is read only on your phone.</p>
       <h2>Exports you choose to share</h2>
-      <p>You can export your fill-ups and your services and costs as CSV files, or everything as a JSON file, from Settings. An export happens only when you tap the export button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
+      <p>You can export your fill-ups and your services and costs as CSV files, or everything (attached photos included) as a JSON file, from Settings. An export happens only when you tap the export button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
 
       <p>Settings › Restore from backup reads a backup file that you pick yourself with your phone's file picker and replaces the app's data on this device with it. The file is read only on your phone.</p>
       <h2>Notifications</h2>
@@ -83,7 +99,7 @@
       <p>Because the data is stored only on your device, uninstalling Gauge removes all of it. You can also delete individual records inside the app. If you exported a file, delete that file wherever you saved it. There is nothing for us to delete on our side, because we never received it.</p>
 
       <h2>Future changes</h2>
-      <p>If a future version adds optional features that move data off the device, such as syncing or pairing between two phones, we will update this policy first and tell you inside the app before anything is sent. Features like that will be opt-in. The effective date at the top of this page changes whenever the policy does.</p>
+      <p>If a future version adds other optional features that move data off the device, such as syncing or pairing between two phones, we will update this policy first and tell you inside the app before anything is sent. Features like that will be opt-in. The effective date at the top of this page changes whenever the policy does.</p>
 
       <h2>Contact</h2>
       <p>Questions about privacy in Gauge: <a href="mailto:fuel-log@foursailsapps.com">fuel-log@foursailsapps.com</a> or <a href="mailto:support@foursailsapps.com">support@foursailsapps.com</a>.</p>
