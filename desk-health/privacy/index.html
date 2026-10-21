@@ -52,11 +52,12 @@
       <p>None of this leaves your device unless you export it yourself. We have no server that receives it, and we cannot see it.</p>
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
       <h2>Apple Health and Health Connect</h2>
-      <p>If you turn on Settings › Detect stand-ups automatically (an Unslump Pro feature, off by default), Unslump asks for permission to read movement data, and reads it only while the app is open:</p>
+      <p>If you turn on Settings › Detect stand-ups automatically (an Unslump Pro feature, off by default), Unslump asks for permission to read movement data:</p>
       <ul>
         <li>On iPhone: your step count and Apple Watch stand time from Apple Health.</li>
         <li>On Android: your step count from Health Connect.</li>
       </ul>
+      <p>On iPhone, Apple Health wakes Unslump in the background when new data arrives (about once an hour, as iOS allows), so it also reads while the app is closed. On Android it reads only while the app is open.</p>
       <p>It reads the time since its last check (at most back to the start of the previous day), on your phone, to find the moments you moved during your stand reminder hours, and adds a stand to its log for each. It keeps nothing else from that data: no step counts, no stand minutes, no samples. The data is never sent anywhere, never shared with anyone, and never used for advertising or anything other than this feature. Unslump does not write anything to Apple Health or Health Connect.</p>
       <p>Use of information received from Health Connect follows the Health Connect Permissions policy, including its Limited Use requirements. You can withdraw access at any time: on iPhone in the Health app (Sharing › Apps › Unslump), on Android in Health Connect's app permissions. Turning the setting off stops the reads.</p>
       <h2>Motion sensor</h2>
