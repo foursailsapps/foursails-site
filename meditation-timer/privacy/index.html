@@ -39,24 +39,28 @@
   <main id="main">
     <div class="wrap prose">
       <h1>Calmwater privacy policy</h1>
-      <p class="meta">Effective 20 October 2026. Applies to the Calmwater app for iOS and Android, published by Four Sails.</p>
+      <p class="meta">Effective 21 October 2026. Applies to the Calmwater app for iOS and Android, published by Four Sails.</p>
 
       <p>The short version: Calmwater keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. The only other third party is the company that handles in-app purchases.</p>
       <h2>What the app stores, and where</h2>
       <p>Calmwater saves the information you enter in a local database (SQLite) and the app's settings storage, both inside the app's private storage on your phone. That includes:</p>
       <ul>
         <li>Sessions you complete: date, start time, planned and actual length, and the bell settings used.</li>
-        <li>Your named presets and settings, such as bell choices and the daily reminder time.</li>
+        <li>If you add them after a sit, a mood (on a five-step scale from restless to very calm) and a short note.</li>
+        <li>Your named presets and settings, such as bell choices, the daily reminder time and your bells through the day.</li>
       </ul>
       <p>None of this leaves your device unless you export it yourself. We have no server that receives it, and we cannot see it.</p>
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
-      <h2>Apple Health (optional)</h2>
-      <p>If you turn on Apple Health in Settings, Calmwater asks for permission to write Mindful Minutes and, when a session ends, saves its start and end time to Apple Health on your phone. That is all it writes, and it never reads anything from Apple Health. The data is handled by Apple Health under Apple's privacy terms; we never receive it, and it is not used for advertising or shared with anyone. You can turn it off in Settings or in the Health app at any time.</p>
+      <h2>Apple Health and Health Connect (optional)</h2>
+      <p>If you turn on saving sessions in Settings (Apple Health on iPhone, Health Connect on Android), Calmwater asks for permission to write, and when a session ends saves its start and end time on your phone: on iPhone to Apple Health as Mindful Minutes, on Android to Health Connect as a meditation (mindfulness) session. That is all it writes; your mood and note are never written, and it never reads anything from Apple Health or Health Connect. The data is handled by Apple Health or Health Connect on your phone under Apple's or Google's privacy terms; we never receive it, and it is not used for advertising or shared with anyone.</p>
+      <p>Use of Health Connect follows the Health Connect Permissions policy, including its Limited Use requirements. You can turn it off in Settings at any time, or withdraw access in the Health app on iPhone or in Health Connect's app permissions on Android.</p>
       <h2>Exports you choose to share</h2>
-      <p>You can export your session history as a JSON file from Settings. An export happens only when you tap the button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
+      <p>You can export your session history, including any moods and notes, as a JSON file from Settings. An export happens only when you tap the button; you pick where the file goes using your phone's share sheet, and whatever app or service you send it to handles it under its own policy.</p>
       <p>Settings › Restore from backup reads a backup file that you pick yourself with your phone's file picker and replaces the app's data on this device with it. The file is read only on your phone.</p>
       <h2>Notifications</h2>
-      <p>The app uses local notifications in two ways: as a backup so your bells still ring if the phone suspends the app during a session, and, if you turn it on, a daily reminder to sit. Both are scheduled on the device; no push server is involved. The permission request appears the first time it is needed, and you can turn notifications off at any time in your phone's settings.</p>
+      <p>The app uses local notifications in three ways: as a backup so your bells still ring if the phone suspends the app during a session and, if you turn them on, a daily reminder to sit and mindfulness bells through the day. All are scheduled on the device; no push server is involved. The permission request appears the first time it is needed, and you can turn notifications off at any time in your phone's settings.</p>
+      <h2>Home-screen widget</h2>
+      <p>The widget (on the Home Screen, and on iPhone also the Lock Screen) shows your streak, today's minutes, this week's minutes and your total number of sits. To draw it, the app saves that short summary in storage shared only with its own widget on your phone (an App Group on iPhone, the app's private files on Android). It never includes moods or notes and never leaves the device.</p>
       <h2>App updates</h2>
       <p>To receive bug fixes without a full App Store update, Calmwater checks Expo's update service (EAS Update, run by Expo, 650 Industries) when it starts. That request contains the app's version, your platform and an update channel name, and Expo's servers see your IP address as with any download. It carries none of the data you enter in the app and no identifier that links to you. Expo's handling is described in the <a href="https://expo.dev/privacy">Expo privacy policy</a>.</p>
       <h2>In-app purchases</h2>
