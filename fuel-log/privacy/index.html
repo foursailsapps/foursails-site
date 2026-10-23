@@ -39,9 +39,9 @@
   <main id="main">
     <div class="wrap prose">
       <h1>Gauge privacy policy</h1>
-      <p class="meta">Effective 21 October 2026. Applies to the Gauge app for iOS and Android, published by Four Sails.</p>
+      <p class="meta">Effective 23 October 2026. Applies to the Gauge app for iOS and Android, published by Four Sails.</p>
 
-      <p>The short version: Gauge keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. The only third parties involved are the company that handles in-app purchases and, when you use the optional vehicle lookups, free US government vehicle databases.</p>
+      <p>The short version: Gauge keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. The only third parties involved are the company that handles in-app purchases, the crash-reporting service (only when something goes wrong) and, when you use the optional vehicle lookups, free US government vehicle databases.</p>
 
       <h2>What the app stores, and where</h2>
       <p>Gauge saves the information you enter in a local database (SQLite) inside the app's private storage on your phone. That includes:</p>
@@ -81,9 +81,12 @@
 
       <h2>App updates</h2>
       <p>To receive bug fixes without a full App Store update, Gauge checks Expo's update service (EAS Update, run by Expo, 650 Industries) when it starts. That request contains the app's version, your platform and an update channel name, and Expo's servers see your IP address as with any download. It carries none of the data you enter in the app and no identifier that links to you. Expo's handling is described in the <a href="https://expo.dev/privacy">Expo privacy policy</a>.</p>
+      <h2>Crash reports</h2>
+      <p>If Gauge crashes or runs into an error, it sends a crash report to <a href="https://sentry.io/">Sentry</a> (Functional Software, Inc.), the service we use to find and fix bugs. A report holds the technical details of the problem: the error and where in the app's code it happened, the app version, and facts about the phone at that moment (model, operating system, language, free memory and storage), plus a random installation ID created by the crash reporter that is not linked to your name, email or any account. It does not include the entries, notes or other information you keep in the app; before a report leaves your phone, the app also removes user details, the device's name, log lines and the addresses of web requests. Nothing is sent while the app works normally: no usage tracking, no screenshots, no performance monitoring. Sentry does not store your IP address with these reports and deletes them automatically within 90 days. Sentry's handling is described in the <a href="https://sentry.io/privacy/">Sentry privacy policy</a>.</p>
       <h2>In-app purchases</h2>
       <p>Paid features are sold through the App Store and Google Play. To unlock them and to restore purchases, the app uses <a href="https://www.revenuecat.com/">RevenueCat</a>. RevenueCat receives an anonymous app-user identifier (a random ID generated on your device, not linked to your name or email) and purchase receipt information from the store. It uses this to confirm which features you have paid for. RevenueCat's handling of that data is described in the <a href="https://www.revenuecat.com/privacy">RevenueCat privacy policy</a>. Apple and Google process the payment itself under their own privacy policies; we never see your payment details.</p>
 
+      <p>On iPhone and iPad, the app also asks Apple for an anonymous attribution token and passes it to RevenueCat. If you installed the app from an ad in App Store search results (Apple Search Ads), this tells us which ad campaign it came from; otherwise it says nothing. The token contains no personal information and is not used to track you across other companies' apps or websites.</p>
       <h2>What we do not do</h2>
       <ul>
         <li>No analytics or usage tracking in this version of the app.</li>
@@ -96,7 +99,7 @@
       <p>Gauge is a general-purpose utility and is not directed at children under 13. We do not knowingly collect personal information from children; as described above, the app does not collect personal information from anyone.</p>
 
       <h2 id="deleting-your-data">Deleting your data</h2>
-      <p>Because the data is stored only on your device, uninstalling Gauge removes all of it. You can also delete individual records inside the app. If you exported a file, delete that file wherever you saved it. There is nothing for us to delete on our side, because we never received it. The one thing held off your device is the anonymous purchase record described under In-app purchases. To have it deleted, email <a href="mailto:support@foursailsapps.com">support@foursailsapps.com</a> from the device you bought on, name the app, and we will ask RevenueCat to erase the record for that device within 30 days; your store receipt with Google or Apple is unaffected.</p>
+      <p>Because the data is stored only on your device, uninstalling Gauge removes all of it. You can also delete individual records inside the app. If you exported a file, delete that file wherever you saved it. There is nothing for us to delete on our side, because we never received it. Crash reports are deleted automatically within 90 days. Apart from those, the one thing held off your device is the anonymous purchase record described under In-app purchases. To have it deleted, email <a href="mailto:support@foursailsapps.com">support@foursailsapps.com</a> from the device you bought on, name the app, and we will ask RevenueCat to erase the record for that device within 30 days; your store receipt with Google or Apple is unaffected.</p>
 
       <h2>Future changes</h2>
       <p>If a future version adds other optional features that move data off the device, such as syncing or pairing between two phones, we will update this policy first and tell you inside the app before anything is sent. Features like that will be opt-in. The effective date at the top of this page changes whenever the policy does.</p>
