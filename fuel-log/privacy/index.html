@@ -39,24 +39,27 @@
   <main id="main">
     <div class="wrap prose">
       <h1>Gauge privacy policy</h1>
-      <p class="meta">Effective 23 October 2026. Applies to the Gauge app for iOS and Android, published by Four Sails.</p>
+      <p class="meta">Effective 12 November 2026. Applies to the Gauge app for iOS and Android, published by Four Sails.</p>
 
       <p>The short version: Gauge keeps everything you enter on your own device. We do not run accounts, we do not collect analytics, we show no ads, and we never sell data. The only third parties involved are the company that handles in-app purchases, the crash-reporting service (only when something goes wrong) and, when you use the optional vehicle lookups, free US government vehicle databases.</p>
 
       <h2>What the app stores, and where</h2>
       <p>Gauge saves the information you enter in a local database (SQLite) inside the app's private storage on your phone. That includes:</p>
       <ul>
-        <li>Vehicles you add: name, whether it runs on fuel or electricity, and, if you enter them, its VIN, year, make and model, the EPA rating you picked, the recalls last found for it, its body type and colour, and for an electric vehicle your home electricity price, its battery capacity, your usual charge limit, the power of your home charger, when you usually unplug it and the times of the charge reminders.</li>
-        <li>Fill-ups and charges: date, odometer reading, volume or energy, price, whether the tank was filled, the station you typed, notes, and for a charge logged by battery level the level before and after, when the car was plugged in and whether the level after is still the app's estimate.</li>
+        <li>Vehicles you add: name, whether it runs on fuel or electricity, and, if you enter them, its VIN, year, make and model, the EPA rating you picked, the recalls last found for it, its body type and colour, and for an electric vehicle or plug-in hybrid your home electricity price, its battery capacity, your usual charge limit, the power of your home charger, when you usually unplug it, when scheduled charging starts, the times of the charge reminders, and a charge you have started but not yet ended (when and where it started, the odometer and the battery level).</li>
+        <li>Fill-ups and charges: date, odometer reading, volume or energy, price, whether the tank was filled, the station you typed, notes, and for a charge logged by battery level the level before and after, when the car was plugged in, and whether a level or the energy is the app's own estimate.</li>
         <li>Photos you attach to fill-ups and costs, such as receipts and invoices, and a photo you add of a vehicle, stored as image files in the app's private storage.</li>
         <li>Service reminders, the service log and other costs you add, such as insurance, repairs, parking and tolls (what, when, how much and at what mileage).</li>
-        <li>Settings such as your preferred units.</li>
+        <li>Settings such as your preferred units and, if you save one, your Home location (see Location below).</li>
       </ul>
       <p>None of this leaves your device unless you export it yourself. We have no server that receives it, and we cannot see it.</p>
       <p>Your phone's own backup (for example iCloud or Google backup) may include the app's data, under Apple's or Google's terms, if you have backups turned on.</p>
 
       <h2>Photos and receipt scanning</h2>
       <p>You can attach photos to a fill-up or a cost, and add one of each vehicle, taken with the camera or picked from your photo library. The app asks for camera access the first time you take one; the photo library opens through the system picker, so Gauge only sees the photos you choose. "Scan receipt" reads the amounts on a receipt photo with the text recognition built into your phone (Apple Vision on iPhone, Google ML Kit's on-device model on Android). The photo and the text are processed only on your phone and are never uploaded. Photos stay in the app's storage until you remove them or delete the fill-up or cost, and they are included in the JSON backup you export.</p>
+
+      <h2>Location</h2>
+      <p>Location is optional and used for one thing: recognising when you start a charge at home. If you choose to save a Home location (when Gauge offers after a charge at home, or in Settings › Home location), the app asks for permission to use your location while it is open and stores that one spot on your phone. After that, when you open Start charging, it reads your location once to see whether you are at that spot, and fills in Home or leaves it empty. Gauge never uses your location in the background, keeps no history of where you have been, and never sends your location anywhere; the spot is not included in the files you export. You can forget it in Settings › Home location or turn off location for Gauge in your phone's settings, and everything else keeps working.</p>
 
       <h2>Vehicle lookups</h2>
       <p>Three optional features look things up on free public services run by the US government. None of them needs an account, and none receives anything you log in the app (fill-ups, costs, photos, notes).</p>
@@ -77,7 +80,7 @@
 
       <p>Settings › Restore from backup reads a backup file that you pick yourself with your phone's file picker and replaces the app's data on this device with it. The file is read only on your phone.</p>
       <h2>Notifications</h2>
-      <p>Service reminders set by date are local notifications on the due date. For an electric vehicle you can also turn on a daily evening and morning charge reminder, each at a time you choose. The app offers to turn notifications on during setup (you can say not now) and asks again only when you set up a reminder, and you can turn notifications off at any time in your phone's settings. Reminders are scheduled locally on the device; no push server is involved.</p>
+      <p>Service reminders set by date are local notifications on the due date. For an electric vehicle or plug-in hybrid you can also turn on a daily evening and morning charge reminder, each at a time you choose. While a charge you started with Start charging is open, the app shows it on your Lock Screen as a Live Activity (iPhone) or as an ongoing notification (Android), which it updates and removes itself. The app offers to turn notifications on during setup (you can say not now) and asks again only when you set up a reminder, and you can turn notifications off at any time in your phone's settings. Reminders are scheduled locally on the device; no push server is involved.</p>
 
       <h2>App updates</h2>
       <p>To receive bug fixes without a full App Store update, Gauge checks Expo's update service (EAS Update, run by Expo, 650 Industries) when it starts. That request contains the app's version, your platform and an update channel name, and Expo's servers see your IP address as with any download. It carries none of the data you enter in the app and no identifier that links to you. Expo's handling is described in the <a href="https://expo.dev/privacy">Expo privacy policy</a>.</p>
